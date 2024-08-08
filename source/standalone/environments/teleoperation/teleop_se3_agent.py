@@ -76,20 +76,20 @@ def main():
         )
 
     # create controller
-    if args_cli.device.lower() == "keyboard":
+    if args_cli.teleop_device.lower() == "keyboard":
         teleop_interface = Se3Keyboard(
-            pos_sensitivity=0.005 * args_cli.sensitivity, rot_sensitivity=0.005 * args_cli.sensitivity
+            pos_sensitivity=0.05 * args_cli.sensitivity, rot_sensitivity=0.05 * args_cli.sensitivity
         )
-    elif args_cli.device.lower() == "spacemouse":
+    elif args_cli.teleop_device.lower() == "spacemouse":
         teleop_interface = Se3SpaceMouse(
             pos_sensitivity=0.05 * args_cli.sensitivity, rot_sensitivity=0.005 * args_cli.sensitivity
         )
-    elif args_cli.device.lower() == "gamepad":
+    elif args_cli.teleop_device.lower() == "gamepad":
         teleop_interface = Se3Gamepad(
             pos_sensitivity=0.1 * args_cli.sensitivity, rot_sensitivity=0.1 * args_cli.sensitivity
         )
     else:
-        raise ValueError(f"Invalid device interface '{args_cli.device}'. Supported: 'keyboard', 'spacemouse'.")
+        raise ValueError(f"Invalid device interface '{args_cli.teleop_device}'. Supported: 'keyboard', 'spacemouse'.")
     # add teleoperation key for env reset
     teleop_interface.add_callback("L", env.reset)
     # print helper for keyboard
